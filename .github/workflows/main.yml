@@ -28,3 +28,4 @@ jobs:
           docker tag ml-cicd-demo:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
 
+
