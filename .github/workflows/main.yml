@@ -26,9 +26,9 @@ jobs:
         run: |
           IMAGE_TAG=${{ github.run_number }}
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-          docker tag ml-cicd-demo:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:${IMAGE_TAG}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:${IMAGE_TAG}
-          docker tag ml-cicd-demo:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
+          docker tag ml-cicd-demo-p:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo-p:${IMAGE_TAG}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo-p:${IMAGE_TAG}
+          docker tag ml-cicd-demo-p:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo-p:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo-p:latest
 
 
