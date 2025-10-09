@@ -22,9 +22,9 @@ jobs:
         run: python test_model.py
       - name: Build Docker image
         run: docker build -t ml-cicd-demo:latest .
-      - name: Push Docker image to Docker Hub
-        run: |
-          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-          docker tag ml-cicd-demo:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
+      # - name: Push Docker image to Docker Hub
+      #   run: |
+      #     echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+      #     docker tag ml-cicd-demo:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
+      #     docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
 
