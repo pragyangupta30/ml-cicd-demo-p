@@ -9,8 +9,6 @@ _, X_test, _, y_test = train_test_split(
     iris.data, iris.target, test_size=0.2, random_state=42
 )
 
-print("Testing - > ")
-
 preds = model.predict(X_test)
 acc = accuracy_score(y_test, preds)
 print(f"✅ Model accuracy: {acc:.2f}")
