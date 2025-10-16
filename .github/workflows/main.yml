@@ -1,33 +1,42 @@
-name: ML CI/CD Pipeline
+# .github/workflows/main.yml
+
+name: CI-CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Train model
-        run: python train.py
-      - name: Test model
-        run: python test_model.py
-      - name: Build Docker image
-        run: docker build -t ml-cicd-demo:latest .
-      - name: Push Docker image to Docker Hub
-        run: |
-          IMAGE_TAG=${{ github.run_number }}
-          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-          docker tag ml-cicd-demo:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:${IMAGE_TAG}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:${IMAGE_TAG}
-          docker tag ml-cicd-demo:latest ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-cicd-demo:latest 
-          
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirnement.txt
+
+    - name: Train model
+      run: python trainmodel.py
+
+    - name: Test model
+      run: python testmodel.py
+
+    - name: Build Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/ml_app:latest .
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Push image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/ml_app:latest
