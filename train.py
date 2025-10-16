@@ -1,19 +1,14 @@
-# testmodel.py
+# # train.py
+# import joblib
+# from sklearn.datasets import load_breast_cancer
+# from sklearn.ensemble import RandomForestClassifier
+# from sklearn.model_selection import train_test_split
 
-import joblib
-from sklearn.datasets import load_breast_cancer
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+# data = load_breast_cancer()
+# X_train, _, y_train, _ = train_test_split(data.data, data.target, test_size=0.2, random_state=42)
 
-model = joblib.load("model.pkl")
+# model = RandomForestClassifier()
+# model.fit(X_train, y_train)
 
-data = load_breast_cancer()
-_, X_test, _, y_test = train_test_split(
-    data.data, data.target, test_size=0.2, random_state=42
-)
-
-preds = model.predict(X_test)
-acc = accuracy_score(y_test, preds)
-print(f"✅ Model accuracy: {acc:.2f}")
-if acc < 0.9:
-    raise Exception("❌ Accuracy below acceptable threshold!")
+# joblib.dump(model, "model.pkl")
+# print("✅ Model trained and saved as model.pkl")
